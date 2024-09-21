@@ -10,7 +10,7 @@ OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
 
 # OpenAI 초기화
-client = OpenAI(api_key=openai_api_key)
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 # Comet LLM 초기화
 comet_llm.init(project='wizard_shop_chatbot', api_key=COMET_API_KEY)
