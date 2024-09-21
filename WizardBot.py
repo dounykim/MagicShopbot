@@ -1,15 +1,17 @@
 import streamlit as st
 import comet_llm
 from groq import Groq
+from openai import OpenAI
 
 # --- API Key 설정 -------------------------------------------------------------
-# Groq API 키 설정
-GROQ_API_KEY = st.secrets['GROQ_API_KEY'] 
-# Comet API 키 설정
 COMET_API_KEY = st.secrets['COMET_API_KEY'] 
 
-# Groq 초기화
-client = Groq(api_key=GROQ_API_KEY)
+OPENAI_API_KEY = st.secrets['OPENAI_API_KEY'] 
+
+
+# OpenAI 초기화
+client = OpenAI(api_key=openai_api_key)
+
 # Comet LLM 초기화
 comet_llm.init(project='wizard_shop_chatbot', api_key=COMET_API_KEY)
 
@@ -116,10 +118,10 @@ if prompt := st.chat_input():
     st.session_state['messages'].append({'role': 'user', 'content': prompt}) 
     # 화면에 사용자 입력을 출력한다.
     st.chat_message('user').write(prompt)
-    
+  
     # GPT 모델을 사용하여 응답을 생성한다.
     response = client.chat.completions.create(
-        model='llama-3.1-70b-versatile',
+        model='gpt-4o-mini',
         messages=context + st.session_state['messages']  # context와 대화 기록을 결합하여 모델에 전달한다.
     )
 
